@@ -1,9 +1,8 @@
 const modal = document.getElementById("myModal")
 const openModal = document.getElementById("add-book")
 const closeModal = document.getElementById("close-modal")
-const form = document.getElementById("add-book-form")
 
-openModal.onclick = () => modal.style.display = "block"
+openModal.onclick = () => modal.style.display = "flex"
 closeModal.onclick = () => modal.style.display = "none"
 
 const BoardController = (function(){
@@ -11,25 +10,31 @@ const BoardController = (function(){
 
     const getBoard = () => board
 
-    function FormHandler(){
+    const addBook = (e) => {
+        e.preventDefault()
+
         const formData = new FormData(form)
-    
-        
+        board.push(createBook(formData.values()))
     }
 
-    const addBook = () => {
-        board.push(createBook())
+    return{
+        getBoard,
+        addBook
     }
 })()
 
+function createBook(bookFormData){
 
+    const bookData = []
 
+    for(let value of bookFormData){
+        bookData.push(value)
+    }
 
-function createBook(title, pages, author, date){
-    const bookTitle = title
-    const bookPages = pages
-    const bookAuthor = author
-    const BookDate = date
+    const bookTitle = bookData[0]
+    const bookPages = bookData[1]
+    const bookAuthor = bookData[2]
+    const BookDate = bookData[3]
 
     const status = "NO"
 
@@ -49,5 +54,19 @@ function createBook(title, pages, author, date){
 }
 
 const ScreenController = (function(){
+    const board = BoardController.getBoard()
+    const form = document.getElementById("add-book-form")
 
+    const addBook = (e) => {
+        e.preventDefault()
+
+        const formData = new FormData(form)
+        board.push(createBook(formData.values()))
+
+        console.log(board)
+    }
+
+    form.addEventListener("submit", addBook)
+
+    
 })()
