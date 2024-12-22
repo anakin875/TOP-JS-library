@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>TOP Library App</h1>
+    </header>
+    <main>
+        <button id="add-book">Add Book</button>
+        <button id="remove-book">Remove Book</button>
+
+        <div class="grid-container"></div>
+
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <h1>Add a book</h1>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <form action="" id="add-book-form">
+                    <label for="ftitle">Title: </label>
+                    <input type="text" id="ftitle" name="ftitle">
+
+                    <label for="fauthor">Author: </label>
+                    <input type="text" id="fauthor" name="fauthor">
+
+                    <label for="fdate">Publish date: </label>
+                    <input type="date" id="fdate" name="fdate">
+
+                    <label for="fpages">Number of pages: </label>
+                    <input type="number" id="fpages" name="fpages">
+
+                    <input type="submit" value="Add Book" id="close-modal">
+                </form>
+                <button id="close-modal">Add book</button>
+            </div>
+        
+        </div>
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>
