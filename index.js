@@ -9,11 +9,8 @@ const BoardController = (function(){
     const board = []
 
     const getBoard = () => board
-
-    const addBook = (e) => {
-        e.preventDefault()
-
-        const formData = new FormData(form)
+    
+    const addBook = (formData) => {
         board.push(createBook(formData.values()))
     }
 
@@ -54,19 +51,31 @@ function createBook(bookFormData){
 }
 
 const ScreenController = (function(){
-    const board = BoardController.getBoard()
     const form = document.getElementById("add-book-form")
 
-    const addBook = (e) => {
+    const displayBook = () => {
+        const board = BoardController.getBoard()
+        const libraryDiv = document.getElementById("library")
+        libraryDiv.textContent = ""
+        board.forEach((book, index) =>{
+            const bookCell = document.createElement("div")
+            bookCell.classList.add("book")
+            bookCell.dataset.index = index
+            bookCell.textContent = book.bookTitle
+            libraryDiv.appendChild(bookCell)
+        })
+    }
+
+    const clickHandler = (e) => {
         e.preventDefault()
 
         const formData = new FormData(form)
-        board.push(createBook(formData.values()))
 
-        console.log(board)
+        BoardController.addBook(formData)
+        displayBook()
     }
 
-    form.addEventListener("submit", addBook)
+    form.addEventListener("submit", clickHandler)
 
     
 })()
